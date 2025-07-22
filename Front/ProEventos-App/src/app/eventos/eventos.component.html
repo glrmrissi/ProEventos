@@ -1,18 +1,31 @@
 <h2>Eventos components</h2>
 <hr />
 
-<form action="" class="">
-  <div class="d-flex gap-2 mb-2">
-    <input type="text" class="form-control" placeholder="Buscar" />
+<div class="">
+  <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+    <label class="mr-2">Filtro:</label>
+    <input
+      type="text"
+      class="form-control mr-2"
+      placeholder="Buscar"
+      [(ngModel)]="filtroLista"
+    />
     <button class="btn btn-outline-success">Buscar</button>
   </div>
-</form>
-
-<table class="table table-striped table-hove">
-  <thead class="table-dark">
+</div>
+<table class="table table-striped table-hover">
+  <thead class="w-100 table-dark">
     <tr>
+      <th>
+        <button
+          type="button"
+          class="btn btn-outline-light btn-light btn-sm text-dark"
+          (click)="alterarImagem()"
+        >
+          {{ !mostrarImagem ? "Mostrar" : "Ocultar" }}
+        </button>
+      </th>
       <th>#</th>
-      <th>Imagem</th>
       <th>Tema</th>
       <th>Local</th>
       <th>Data</th>
@@ -22,24 +35,31 @@
     </tr>
   </thead>
   <tbody *ngIf="eventos && eventos.length">
-    <tr *ngFor="let evento of eventos">
-      <td>{{ evento.eventoId }}</td>
+    <tr *ngFor="let evento of eventosFiltrados">
       <td>
-        <img src="{{ evento.imagemURL }}" alt="" width="50px">
+        <img
+          *ngIf="mostrarImagem"
+          src="{{ evento.imagemURL }}"
+          style="width: 100px"
+        />
       </td>
+      <td>{{ evento.eventoId }}</td>
       <td>{{ evento.tema }}</td>
       <td>{{ evento.local }}</td>
       <td>{{ evento.dataEvento }}</td>
       <td>{{ evento.qtdPessoas }}</td>
       <td>{{ evento.lote }}</td>
-      <td>Opções</td>
+      <td>
+        <button type="button" class="btn btn-info btn-sm m-1">Editar</button>
+        <button type="button" class="btn btn-danger btn-sm m-1">Excluir</button>
+      </td>
     </tr>
   </tbody>
   <tfoot *ngIf="!eventos && !eventos.length">
     <tr>
-        <td colspan="8">
-            <h4 class="text-center">Nenhum evento encontrado</h4>
-        </td>
+      <td colspan="8">
+        <h4 class="text-center">Nenhum evento encontrado</h4>
+      </td>
     </tr>
   </tfoot>
 </table>

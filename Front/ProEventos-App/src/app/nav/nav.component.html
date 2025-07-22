@@ -9,10 +9,16 @@
       aria-controls="navbarNav"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      (click)="collapseNav()"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
+    <div
+      class="collapse navbar-collapse"
+      #navbarNav
+      id="navbarNav"
+      [class.show]="isCollapsedNav"
+    >
       <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="#">Eventos</a>
